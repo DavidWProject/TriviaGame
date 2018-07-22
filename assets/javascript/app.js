@@ -1,4 +1,3 @@
-
 //Beginning code effect from CodePen
 var Messenger = function (el) {
   'use strict';
@@ -97,8 +96,7 @@ var Messenger = function (el) {
 console.clear();
 var messenger = new Messenger($('#messenger'));
 
-
-
+// Array of Object Qustion Bank
 var triviaGame = [{
     question: "What is Javascript?",
     answerBank: [
@@ -206,11 +204,11 @@ var triviaGame = [{
 $(document).ready(function () {
 
    
-
+//This starts the trivia
   setTimeout(startTrivia, 15000);
 
   
-
+//Hides the special effect 'messenger in the beginning, fades the quiz section of the hmlt and starts the game and timer. (this is a text timer I hide from display. The hidden timer is used to help create the circular timer display)
   function startTrivia() {
     $('#messenger').hide();
     $('.quiz').fadeIn("slow");
@@ -221,6 +219,7 @@ $(document).ready(function () {
   };
 
   var btn = $("button");
+  var buttonClicked = 0; 
   var choice1 = $(".answerChoice1");
   var choice2 = $(".answerChoice2");
   var choice3 = $(".answerChoice3");
@@ -240,6 +239,7 @@ $(document).ready(function () {
   var interval; 
   var correctPercent = ((correctAnswered / 10) * 100);
 
+  //These are the functions to run the hidden text countdown, I left it since it has code that runs the app
   function run() {
     clearInterval(intervalId);
     timeRemaining = 60; 
@@ -257,8 +257,6 @@ $(document).ready(function () {
     if (timeRemaining === 0) {
       timeRemaining = 60; 
       stop();
-
-      alert("Time Up!");
 
       var choiceString = ".answerChoice" + triviaGame[questionCounter].answer;
       $(choiceString).css("background-color", "green"); 
@@ -278,7 +276,7 @@ $(document).ready(function () {
     clearInterval(intervalId);
   };
 
-
+  //Runs the timers, appends the variables to the display
   function gameStart() {
     run();
     timers(); 
@@ -288,8 +286,10 @@ $(document).ready(function () {
     $(choice3).append(triviaGame[questionCounter].answerBank[2]);
     $(choice4).append(triviaGame[questionCounter].answerBank[3]);
   };
+  
 
   $("button").on("click", function checkQuestion() {
+    buttonClicked++; 
     if ($(this).val() === triviaGame[questionCounter].answer) {
       $(this).css("background-color", "green");
       correctAnswered++;
@@ -309,6 +309,7 @@ $(document).ready(function () {
     }
   });
 
+  //For that slight text animation when you hover over each button
   $("button").hover(function () {
     $(this).animate({
       "font-size": "22px"
@@ -341,10 +342,11 @@ $(document).ready(function () {
   };
 
   function showResult() {
-    correctPercent = ((correctAnswered / 10) * 100)
+
+    timeStop();
+    correctPercent = (((correctAnswered) / buttonClicked) * 100);
     $(".time").hide(); 
-    $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent + "%</h1>");
-    $(".questionAnsweredCorrectly").append("<h1 style='color: white; text-align: center;'>Number of questions answered correctly: " + correctAnswered + "</h1>");
+    $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent.toFixed(2) + "%</h1>");
     $(".wrongGuesses").append("<h1 style='color: lightred; text-align: center;'> Number of wrong guesses :" + wrongGuesses + "</h1>");
     $(".missedQuestions").append("<h1 style='color: white; text-align: center;'> Number of missed questions :" + missedQuestion + "</h1>");
   };
@@ -356,8 +358,6 @@ $(document).ready(function () {
     i = 60;
     interval = setInterval(decrement1, 1000); 
     $('.circle_animation').css('stroke-dashoffset', initialOffset-(1*(initialOffset/time)));
-    timeStop();
-    stop();
   };
 
   
@@ -378,44 +378,5 @@ $(document).ready(function () {
   function timeStop() {
     clearInterval(interval);
   };
-
-  // function run() {
-  //   clearInterval(intervalId);
-  //   timeRemaining = 60; 
-  //   intervalId = setInterval(decrement, 1000);
-  //   clearInterval(interval); 
-  // }
-
-
-  // function decrement() {
-
-  //   timeRemaining--;
-
-
-  //   $(timer).html("<p>Time Remaining: " + timeRemaining + "</p>");
-
-  //   if (timeRemaining === 0) {
-  //     timeRemaining = 30; 
-  //     stop();
-
-  //     alert("Time Up!");
-
-  //     var choiceString = ".answerChoice" + triviaGame[questionCounter].answer;
-  //     $(choiceString).css("background-color", "green"); 
-  //     missedQuestion++
-  //     setTimeout(function() {
-  //       nextQuestion(); 
-  //     }, 2000); 
-  //   }
-  // };
-
-  // //  The stop function
-  // function stop() {
-
-  //   //  Clears our intervalId
-  //   //  We just pass the name of the interval
-  //   //  to the clearInterval function.
-  //   clearInterval(intervalId);
-  // }
 
 });
