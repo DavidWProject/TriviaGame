@@ -341,6 +341,8 @@ $(document).ready(function () {
   };
 
   function showResult() {
+    timeStop();
+    stop();
     correctPercent = ((correctAnswered / 10) * 100)
     $(".time").hide(); 
     $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent + "%</h1>");
@@ -356,8 +358,6 @@ $(document).ready(function () {
     i = 60;
     interval = setInterval(decrement1, 1000); 
     $('.circle_animation').css('stroke-dashoffset', initialOffset-(1*(initialOffset/time)));
-    timeStop();
-    stop();
   };
 
   
