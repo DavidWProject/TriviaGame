@@ -343,12 +343,11 @@ $(document).ready(function () {
   };
 
   function showResult() {
-    i = -1
+    clearInterval(intervalId);
     timeStop();
-    stop();
     correctPercent = (((correctAnswered) / buttonClicked) * 100);
     $(".time").hide(); 
-    $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent + "%</h1>");
+    $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent.toFixed(2) + "%</h1>");
     $(".wrongGuesses").append("<h1 style='color: lightred; text-align: center;'> Number of wrong guesses :" + wrongGuesses + "</h1>");
     $(".missedQuestions").append("<h1 style='color: white; text-align: center;'> Number of missed questions :" + missedQuestion + "</h1>");
   };
