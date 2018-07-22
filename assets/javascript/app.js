@@ -343,7 +343,7 @@ $(document).ready(function () {
   function showResult() {
     timeStop();
     stop();
-    correctPercent = ((correctAnswered / 9) * 100)
+    correctPercent = (((correctAnswered + 1) / 10) * 100);
     $(".time").hide(); 
     $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent + "%</h1>");
     $(".questionAnsweredCorrectly").append("<h1 style='color: white; text-align: center;'>Number of questions answered correctly: " + (correctAnswered + 1) + "</h1>");
