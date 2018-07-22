@@ -221,6 +221,7 @@ $(document).ready(function () {
   };
 
   var btn = $("button");
+  var buttonClicked = 0; 
   var choice1 = $(".answerChoice1");
   var choice2 = $(".answerChoice2");
   var choice3 = $(".answerChoice3");
@@ -290,6 +291,7 @@ $(document).ready(function () {
   };
 
   $("button").on("click", function checkQuestion() {
+    buttonClicked++; 
     if ($(this).val() === triviaGame[questionCounter].answer) {
       $(this).css("background-color", "green");
       correctAnswered++;
@@ -341,9 +343,10 @@ $(document).ready(function () {
   };
 
   function showResult() {
+    i = -1
     timeStop();
     stop();
-    correctPercent = (((correctAnswered + 1) / 10) * 100);
+    correctPercent = (((correctAnswered + 1) / buttonClicked) * 100);
     $(".time").hide(); 
     $(".percentCorrect").append("<h1 style='color: green; text-align: center;'>" + correctPercent + "%</h1>");
     $(".questionAnsweredCorrectly").append("<h1 style='color: white; text-align: center;'>Number of questions answered correctly: " + (correctAnswered + 1) + "</h1>");
