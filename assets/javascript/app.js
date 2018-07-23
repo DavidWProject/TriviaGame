@@ -213,7 +213,7 @@ $(document).ready(function () {
   function startTrivia() {
     $('#messenger').hide();
     $('.quiz').fadeIn("slow");
-    // $('.timer').fadeIn("slow"); 
+    $('.timer').fadeIn("slow"); 
     gameStart();
     run();
     timers(); 
